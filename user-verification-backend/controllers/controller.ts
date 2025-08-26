@@ -5,15 +5,15 @@ import {
     sendAndConfirmTransaction,
     clusterApiUrl,
   } from '@solana/web3.js';
-  import {
+import {
     getOrCreateAssociatedTokenAccount,
     transfer,
     TOKEN_PROGRAM_ID,
   } from '@solana/spl-token';
-  import { tokenMintAddress, amount } from '../utils/constants.js';
-  import secret from '../secret.json' assert { type: 'json' };;
+import { tokenMintAddress, amount } from '../utils/constants.js';
+const secret = JSON.parse(fs.readFileSync('./secret.json', 'utf-8'));
 
-  export async function transferSplToken(recipientAddress: string) {
+export async function transferSplToken(recipientAddress: string) {
     try {
         const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
     const sender = Keypair.fromSecretKey(Uint8Array.from(secret));
